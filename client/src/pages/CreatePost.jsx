@@ -15,13 +15,21 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false); // useState used while making contact with the API and waiting to get back the image
   const [loading, setLoading] = useState(false);
 
-  const generateImg = () => {};
+  // call the backend
+  const generateImg = () => {
+
+  };
 
   const handleSubmit = () => {};
 
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  };
 
-  const handleSurpriseMe = () => {};
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt })
+  };
 
   return (
     <section className='max-w-7xl mx-auto'>
