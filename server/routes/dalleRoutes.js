@@ -12,8 +12,28 @@ const config = new Configuration({
 
 const openai = new OpenAIApi(config);
 
-router.route('/').get((req, res) =>{ 
-    res.send('Hello from DALL-E route!')
+router.route('/').post(async (req, res) => {
+    try {
+      // get the prompt from the client form prompt
+      const { prompt } = req.body;
+
+      // generate the image
+      const aiResponse = await openai.createImage({
+        prompt,
+        n: 1,
+        size: '1024x1024',
+        response_format: 'b64_json'
+      });
+
+      const image = aiResponse.data.data[0].b64_json;
+
+      // sending the image to the client
+      res.status(200).json({ photo: image })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error?.response.data.error.message)
+    }
 })
 
 export default router;
