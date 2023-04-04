@@ -8,9 +8,9 @@ import { FormField, Loader } from '../components';
 const CreatePost = () => {
   const navigate = useNavigate(); // navigate back to the home page once the post is created
   const [form, setForm] = useState({
-  name: '',
-  prompt: '',
-  photo: ''
+    name: '',
+    prompt: '',
+    photo: ''
   });
   const [generatingImg, setGeneratingImg] = useState(false); // useState used while making contact with the API and waiting to get back the image
   const [loading, setLoading] = useState(false);
@@ -49,16 +49,17 @@ const CreatePost = () => {
       setLoading(true);
 
       try {
-        const response = await fetch('http://localhost:8080/api/v1/post', {
+        const response = await fetch('http://localhost:8080/api/v1/posts', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            body: JSON.stringify(form)
-          }
+          },
+          body: JSON.stringify({ ...form})
         })
 
         await response.json();
         navigate('/');
+        
       } catch (error) {
         alert(error)
       } finally {
