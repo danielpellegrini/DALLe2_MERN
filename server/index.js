@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 
 // api endpoints that can be hooked on from client side
-app.use('/api/v1/post', postRoutes);
+app.use('/api/v1/posts', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
 
 // Root Route
